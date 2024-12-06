@@ -21,6 +21,7 @@ public:
 private slots:
     void onWordInputClicked();
     void onTextInputClicked();
+    void onWordButtonClicked();
 
 private:
     Ui::handsinput *ui;

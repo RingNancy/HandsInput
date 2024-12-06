@@ -2,6 +2,7 @@
 #include "paintinputui.h"
 #include "ui_handsinput.h"
 #include "handwritingwidget.h"
+#include <QDebug>
 
 
 handsinput::handsinput(QWidget *parent) :
@@ -41,6 +42,17 @@ handsinput::handsinput(QWidget *parent) :
     // 连接按钮的点击事件
     connect(wordInputButton, &QPushButton::clicked, this, &handsinput::onWordInputClicked);
     connect(textInputButton, &QPushButton::clicked, this, &handsinput::onTextInputClicked);
+
+    //链接候选词按钮
+    connect(ui->word1, &QPushButton::clicked, this, &handsinput::onWordButtonClicked);
+    connect(ui->word2, &QPushButton::clicked, this, &handsinput::onWordButtonClicked);
+    connect(ui->word3, &QPushButton::clicked, this, &handsinput::onWordButtonClicked);
+    connect(ui->word4, &QPushButton::clicked, this, &handsinput::onWordButtonClicked);
+    connect(ui->word5, &QPushButton::clicked, this, &handsinput::onWordButtonClicked);
+    connect(ui->word6, &QPushButton::clicked, this, &handsinput::onWordButtonClicked);
+    connect(ui->word7, &QPushButton::clicked, this, &handsinput::onWordButtonClicked);
+    connect(ui->word8, &QPushButton::clicked, this, &handsinput::onWordButtonClicked);
+    connect(ui->word9, &QPushButton::clicked, this, &handsinput::onWordButtonClicked);
 }
 
 handsinput::~handsinput()
@@ -53,6 +65,7 @@ void handsinput::onWordInputClicked()
 {
     // 切换到 word_widget 页面
     stackedWidget->setCurrentWidget(ui->word_widget);
+
 }
 
 // 文本按钮点击时的槽函数
@@ -61,4 +74,15 @@ void handsinput::onTextInputClicked()
     // 切换到 text_widget 页面
     stackedWidget->setCurrentWidget(ui->text_widget);
 }
+
+void handsinput::onWordButtonClicked()
+{
+    QPushButton *button = qobject_cast<QPushButton *>(sender());
+    if (button)
+    {
+        QString word = button->text();
+        qDebug()<< "Clicked on: " << word;
+    }
+}
+
 
