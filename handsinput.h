@@ -2,8 +2,9 @@
 #define HANDSINPUT_H
 
 #include <QMainWindow>
-#include <QWidget>
-#include <msinkaut.h>
+#include <QStackedWidget>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 namespace Ui {
 class handsinput;
@@ -14,11 +15,16 @@ class handsinput : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit handsinput(QMainWindow *parent = 0);
+    explicit handsinput(QWidget *parent = nullptr);
     ~handsinput();
+
+private slots:
+    void onWordInputClicked();
+    void onTextInputClicked();
 
 private:
     Ui::handsinput *ui;
+    QStackedWidget *stackedWidget;
 };
 
 #endif // HANDSINPUT_H

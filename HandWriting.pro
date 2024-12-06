@@ -28,10 +28,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        handsinput.cpp
+        handsinput.cpp \
+    paintinputui.cpp \
+    handwritingwidget.cpp
 
 HEADERS += \
-        handsinput.h
+        handsinput.h \
+    paintinputui.h \
+    handwritingwidget.h
 
 FORMS += \
         handsinput.ui
