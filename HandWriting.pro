@@ -30,12 +30,12 @@ SOURCES += \
         main.cpp \
         handsinput.cpp \
     paintinputui.cpp \
-    handwritingwidget.cpp
+    handwritinginput.cpp
 
 HEADERS += \
         handsinput.h \
     paintinputui.h \
-    handwritingwidget.h
+    handwritinginput.h
 
 FORMS += \
         handsinput.ui

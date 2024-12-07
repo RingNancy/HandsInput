@@ -1,4 +1,4 @@
-#include "paintInputUI.h"
+﻿#include "paintInputUI.h"
 #include <QPainter>
 #include <QPen>
 #include <QBrush>
@@ -51,3 +51,4 @@ void PaintInputUI::drawGrid(QPainter &painter)
         painter.drawLine(0, y, width(), y);
     }
 }
+

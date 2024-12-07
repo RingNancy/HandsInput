@@ -1,10 +1,12 @@
-#ifndef PAINTINPUTUI_H
+﻿#ifndef PAINTINPUTUI_H
 #define PAINTINPUTUI_H
 
 #include <QWidget>
 #include <QPainter>
 #include <QPen>
 #include <QBrush>
+#include "handsinput.h"
+#include "handwritinginput.h"
 
 class PaintInputUI : public QWidget
 {
@@ -13,7 +15,6 @@ class PaintInputUI : public QWidget
 public:
     explicit PaintInputUI(QWidget *parent = nullptr);
     ~PaintInputUI();
-
 protected:
     void paintEvent(QPaintEvent *event) override;
 
