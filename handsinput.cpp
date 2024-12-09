@@ -14,6 +14,14 @@ handsinput::handsinput(QWidget *parent) :
     inputs.inputInit((HWND)hshow);
     recognitionTimer = new QTimer(this);
 
+    //将识别预测按钮word,保存到列表中；
+    m_wordButton = {ui->word1, ui->word2, ui->word3, ui->word4,
+                   ui->word5, ui->word6, ui->word7, ui->word8, ui->word9};
+    for(auto button : m_wordButton)
+    {
+        button->setAttribute(Qt::WA_Hover, true);
+        button->installEventFilter(this);
+    }
 
     // 获取 stackedWidget 控件
     stackedWidget = ui->stackedWidget;
@@ -22,8 +30,7 @@ handsinput::handsinput(QWidget *parent) :
     QPushButton *wordInputButton = ui->word_input;
     QPushButton *textInputButton = ui->text_input;
 
-    // 获取 QStackedWidget 中的两个页面
-    QWidget *word_widget = stackedWidget->widget(0);
+    // 获取 QStackedWidget
     QWidget *text_widget = stackedWidget->widget(1);
 
     // 给文本行手写绘制网格ui
@@ -65,6 +72,26 @@ handsinput::~handsinput()
     delete ui;
 }
 
+bool handsinput::eventFilter(QObject *obj, QEvent *event)
+{
+    if(event->type() == QEvent::HoverEnter)
+    {
+        QPushButton *button = qobject_cast<QPushButton*>(obj);
+        if(button && m_wordButton.contains(button))
+        {
+            ui->candidate_word1->setText(button->text());
+        }
+    }
+    else if (event->type() == QEvent::HoverLeave)
+    {
+        QPushButton *button = qobject_cast<QPushButton*>(obj);
+        if(button && m_wordButton.contains(button))
+        {
+            ui->candidate_word1->setText(ui->word1->text());
+        }
+    }
+    return QWidget::eventFilter(obj, event);
+}
 // 单字按钮点击时的槽函数
 void handsinput::onWordInputClicked()
 {
@@ -93,6 +120,7 @@ void handsinput::onWordButtonClicked()
 // 清空所有按钮上的文本
 void handsinput::clearButtonText()
 {
+    ui->candidate_word1->setText("");
     ui->word1->setText("");
     ui->word2->setText("");
     ui->word3->setText("");
@@ -144,6 +172,7 @@ void handsinput::mouseReleaseEvent(QMouseEvent *event)
     tempRlt.clear();
     inputs.registerResults(tempRlt);  // 进行识别
     // 更新按钮显示识别结果
+    ui->candidate_word1->setText(QString::fromUtf8(QByteArray(tempRlt[0].result)));
     ui->word1->setText(QString::fromUtf8(QByteArray(tempRlt[0].result)));
     ui->word2->setText(QString::fromUtf8(QByteArray(tempRlt[1].result)));
     ui->word3->setText(QString::fromUtf8(QByteArray(tempRlt[2].result)));

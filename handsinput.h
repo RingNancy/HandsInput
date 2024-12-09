@@ -6,6 +6,8 @@
 #include <QPushButton>
 #include <QMouseEvent>
 #include <QRect>
+#include <QList>
+#include <QEvent>
 #include <QTimer>
 #include "handwritinginput.h"
 
@@ -35,6 +37,8 @@ private slots:
 protected:
     void mouseReleaseEvent(QMouseEvent *e);
 
+    bool eventFilter(QObject *watched, QEvent *event) override;  //重写时间过滤器方法，实现在按钮悬停，将文本显示在candidatebutton中
+
 private:
     Ui::handsinput *ui;
     QStackedWidget *stackedWidget;
@@ -42,6 +46,7 @@ private:
     QVector<QString> regData; // 用于保存手写识别的结果
     QTimer *recognitionTimer; // 用于定时器
     bool autoinput; // 用于自动输入标志
+    QList<QPushButton*> m_wordButton;
 };
 
 #endif // HANDSINPUT_H

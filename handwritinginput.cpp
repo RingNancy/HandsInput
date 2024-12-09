@@ -11,6 +11,7 @@ HandwritingInput::~HandwritingInput()
     releaseResources();
 }
 
+//手写区域设置，单字手写和多字手写的区别
 void HandwritingInput::inputInit(HWND hwnd)
 {
     if (NULL == hwnd)
@@ -79,8 +80,6 @@ void HandwritingInput::inputInit(HWND hwnd)
     RecognizerGuide->put_GuideData(recoguide);
     g_pIInkRecoContext->putref_Guide(RecognizerGuide);
 #endif
-
-
 }
 
 void HandwritingInput::registerResults(InputResults &results)  //手写墨迹的识别
